@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FishAqua Pets - Cadastrar Serviço</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -40,7 +41,7 @@
                 </a>
                 <a href="estoque.html" class="sidebar-link">
                     <span class="nav-icon">📦</span>
-                    <span class="item-text">Estoque</span>
+                    <span class="item-text">Produtos</span>
                 </a>
                 <a href="vendas.html" class="sidebar-link">
                     <span class="nav-icon">💵</span>
@@ -89,7 +90,7 @@
                 </div>
             </header>
 
-            <form id="form-servico" onsubmit="event.preventDefault(); window.location.href='servicos.html';" class="w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">                
+            <form id="form-servico" onsubmit="event.preventDefault(); finalizarCadastro();" class="w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">                
                 
                 <div class="lg:col-span-2 space-y-8">
                     
@@ -225,30 +226,33 @@
 
             // 1. Interação de Mostrar/Esconder Frequência
             if (tipoContrato && containerFrequencia) {
-                // Começa escondido se for avulso
                 containerFrequencia.style.display = tipoContrato.value === 'assinatura' ? 'block' : 'none';
 
                 tipoContrato.addEventListener('change', () => {
-                    if (tipoContrato.value === 'assinatura') {
-                        containerFrequencia.style.display = 'block';
-                    } else {
-                        containerFrequencia.style.display = 'none';
-                    }
+                    containerFrequencia.style.display = tipoContrato.value === 'assinatura' ? 'block' : 'none';
                 });
             }
 
-            // 2. Interação de Cálculo de Lucro em Tempo Real
+            // Helper: Transforma "R$ 1.250,50" no número limpo 1250.50 para fazer contas
+            function extrairValorNumerico(texto) {
+                const limpo = texto.replace(/[^\d,]/g, '').replace(',', '.');
+                return parseFloat(limpo) || 0;
+            }
+
+            // 2. Interação de Cálculo de Lucro em Tempo Real (Atualizada para suportar a máscara)
             function calcularLucro() {
-                // Converte formatos de moeda "150,00" para número puro "150.00"
-                const preco = parseFloat(precoInput.value.replace(',', '.')) || 0;
-                const custo = parseFloat(custoInput.value.replace(',', '.')) || 0;
+                const preco = extrairValorNumerico(precoInput.value);
+                const custo = extrairValorNumerico(custoInput.value);
 
                 if (preco > 0) {
                     const lucro = preco - custo;
-                    const margem = (lucro / preco) * 100;
+                    const lucroReal = preco - custo;
+                    const margem = (lucroReal / preco) * 100;
                     
-                    if (lucro >= 0) {
-                        resultadoLucro.innerHTML = `Lucro est.: <span class="text-green-600 font-bold">R$ ${lucro.toFixed(2).replace('.', ',')}</span> (${margem.toFixed(0)}% de margem)`;
+                    if (lucroReal >= 0) {
+                        // Formata o lucro final exibido na tela também como moeda brasileira
+                        const lucroFormatado = lucroReal.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+                        resultadoLucro.innerHTML = `Lucro est.: <span class="text-green-600 font-bold">R$ ${lucroFormatado}</span> (${margem.toFixed(0)}% de margem)`;
                     } else {
                         resultadoLucro.innerHTML = `Margem est.: <span class="text-red-500 font-bold">Atenção: Custo maior que o preço!</span>`;
                     }
@@ -257,12 +261,70 @@
                 }
             }
 
-            if (precoInput && custoInput) {
-                precoInput.addEventListener('input', calcularLucro);
-                custoInput.addEventListener('input', calcularLucro);
+            // 3. Função da Máscara de Moeda (Dispara o cálculo a cada digitação)
+            function configurarMascaraMoeda(input) {
+                if (!input) return;
+
+                input.addEventListener('input', (e) => {
+                    let valor = e.target.value.replace(/\D/g, ''); 
+                    if (valor === '') {
+                        e.target.value = '';
+                        calcularLucro();
+                        return;
+                    }
+                    valor = (parseInt(valor, 10) / 100).toFixed(2);
+                    valor = valor.replace('.', ',');
+                    valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+                    e.target.value = 'R$ ' + valor;
+
+                    // Executa o cálculo com os novos valores mascarados
+                    calcularLucro();
+                });
+            }
+
+            // Ativa as máscaras nos inputs de preço e custo
+            configurarMascaraMoeda(precoInput);
+            configurarMascaraMoeda(custoInput);
+
+            // Inicializa os ícones do Lucide na tela
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
             }
         });
+
+        // 4. FUNÇÃO PARA EXIBIR O BALÃO VISUAL (TOAST)
+        function mostrarToast(mensagem) {
+            const toast = document.createElement('div');
+            toast.className = "fixed bottom-5 right-5 bg-slate-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-10 opacity-0 transition-all duration-300 z-50 border border-slate-800";
+            
+            toast.innerHTML = `
+                <span class="text-xl">✨</span>
+                <div>
+                    <p class="text-sm font-bold text-white">${mensagem}</p>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            }, 100);
+        }
+
+        // 5. FUNÇÃO QUE GERA O TIMESTAMP E FAZ O REDIRECIONAMENTO
+        function finalizarCadastro() {
+            const agora = new Date();
+            const timestamp = `${agora.toLocaleDateString('pt-BR')} às ${agora.toLocaleTimeString('pt-BR')}`;
+            
+            mostrarToast(`Serviço salvo com sucesso em ${timestamp}!`);
+            
+            setTimeout(() => {
+                window.location.href = 'servicos.html';
+            }, 1800);
+        }
     </script>
+
+
 
     <script src="sidebar.js"></script>
 </body>

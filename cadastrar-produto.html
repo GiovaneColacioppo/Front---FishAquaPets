@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FishAqua Pets - Cadastrar Produto</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -42,7 +43,7 @@
                 </a>
                 <a href="estoque.html" class="sidebar-link active">
                     <span class="nav-icon">📦</span>
-                    <span class="item-text">Estoque</span>
+                    <span class="item-text">Produtos</span>
                 </a>
                 <a href="vendas.html" class="sidebar-link">
                     <span class="nav-icon">💵</span>
@@ -91,7 +92,7 @@
                 </div>
             </header>
 
-<form id="form-produto" onsubmit="event.preventDefault(); window.location.href='estoque.html';" class="w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">                
+<form id="form-produto" onsubmit="event.preventDefault(); finalizarCadastroProduto();" class="w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">               
                 <div class="lg:col-span-2 space-y-8">
                     
                     <section class="bg-white rounded-2xl shadow-figma border border-gray-100 p-8">
@@ -124,23 +125,22 @@
                         <h2 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-6 flex items-center gap-2">
                             💰 Preços e Medidas
                         </h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Preço de Venda -->
                             <div>
                                 <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Preço de Venda (R$)</label>
-                                <input type="text" placeholder="0,00" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-sm font-bold text-blue-600">
+                                <input type="text" id="preco-venda" placeholder="0,00" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-sm font-bold text-blue-600">
                             </div>
+
+                            <!-- Preço de Custo -->
                             <div>
                                 <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Preço de Custo (R$)</label>
-                                <input type="text" placeholder="0,00" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-sm font-bold text-gray-600">
+                                <input type="text" id="preco-custo" placeholder="0,00" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-sm font-bold text-gray-600">
                             </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Unidade</label>
-                                <select class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-sm font-medium">
-                                    <option>Unidade (uni.)</option>
-                                    <option>Gramas (g)</option>
-                                    <option>Quilos (kg)</option>
-                                    <option>Litros (l)</option>
-                                </select>
+                            
+                            <!-- LINHA ADICIONADA: Indicador de margem de lucro -->
+                            <div class="md:col-span-2 text-xs font-semibold text-gray-400 mt-2" id="resultado-lucro">
+                                Margem estimada: <span class="text-gray-500">Preencha os valores para calcular</span>
                             </div>
                         </div>
                     </section>
@@ -204,5 +204,105 @@
     </div>
 
     <script src="sidebar.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const precoVendaInput = document.getElementById('preco-venda');
+            const precoCustoInput = document.getElementById('preco-custo');
+            const resultadoLucro = document.getElementById('resultado-lucro');
+
+            // Transforma a string formatada "R$ 1.500,00" em número real (1500.00) para o JS calcular
+            function extrairValorNumerico(texto) {
+                const limpo = texto.replace(/[^\d,]/g, '').replace(',', '.');
+                return parseFloat(limpo) || 0;
+            }
+
+            // Realiza o cálculo em tempo real baseado no Preço de Venda e Custo
+            function calcularLucroProduto() {
+                if (!precoVendaInput || !precoCustoInput || !resultadoLucro) return;
+
+                const venda = extrairValorNumerico(precoVendaInput.value);
+                const custo = extrairValorNumerico(precoCustoInput.value);
+
+                if (venda > 0) {
+                    const lucroReal = venda - custo;
+                    const margem = (lucroReal / venda) * 100;
+                    
+                    if (lucroReal >= 0) {
+                        // Formata o lucro calculado de volta para o padrão de moeda brasileiro
+                        const lucroFormatado = lucroReal.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+                        resultadoLucro.innerHTML = `Lucro est.: <span class="text-green-600 font-bold">R$ ${lucroFormatado}</span> (${margem.toFixed(0)}% de margem)`;
+                    } else {
+                        resultadoLucro.innerHTML = `Margem est.: <span class="text-red-500 font-bold">Atenção: Custo maior que o preço de venda!</span>`;
+                    }
+                } else {
+                    resultadoLucro.innerHTML = `Margem estimada: <span class="text-gray-500">Preencha os valores para calcular</span>`;
+                }
+            }
+
+            // Aplica a máscara visual de dinheiro e dispara o recálculo do lucro
+            function configurarMascaraMoeda(input) {
+                if (!input) return;
+
+                input.addEventListener('input', (e) => {
+                    let valor = e.target.value.replace(/\D/g, ''); 
+                    if (valor === '') {
+                        e.target.value = '';
+                        calcularLucroProduto();
+                        return;
+                    }
+                    valor = (parseInt(valor, 10) / 100).toFixed(2);
+                    valor = valor.replace('.', ',');
+                    valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+                    e.target.value = 'R$ ' + valor;
+
+                    // Calcula o lucro a cada tecla digitada
+                    calcularLucroProduto();
+                });
+            }
+
+            // Inicializa as funções nos campos corretos
+            configurarMascaraMoeda(precoVendaInput);
+            configurarMascaraMoeda(precoCustoInput);
+
+            // Garante que os ícones da biblioteca Lucide carreguem se existirem
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+
+        // 4. FUNÇÃO PARA EXIBIR O BALÃO VISUAL (TOAST)
+        function mostrarToastProduto(mensagem) {
+            const toast = document.createElement('div');
+            toast.className = "fixed bottom-5 right-5 bg-slate-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-10 opacity-0 transition-all duration-300 z-50 border border-slate-800";
+            
+            toast.innerHTML = `
+                <span class="text-xl">✨</span>
+                <div>
+                    <p class="text-sm font-bold text-white">${mensagem}</p>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            }, 100);
+        }
+
+        // 5. FUNÇÃO QUE GERA O TIMESTAMP E REDIRECIONA PARA O ESTOQUE/PRODUTOS
+        function finalizarCadastroProduto() {
+            const agora = new Date();
+            const timestamp = `${agora.toLocaleDateString('pt-BR')} às ${agora.toLocaleTimeString('pt-BR')}`;
+            
+            mostrarToastProduto(`Produto salvo com sucesso em ${timestamp}!`);
+            
+            setTimeout(() => {
+                window.location.href = 'estoque.html'; // Redireciona de volta para a lista
+            }, 1800);
+        }
+
+    </script>
+    
 </body>
 </html>

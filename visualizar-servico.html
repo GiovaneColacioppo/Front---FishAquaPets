@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FishAqua Pets - Visualizar Produto</title>
+    <title>FishAqua Pets - Visualizar Serviço</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="dashboard-body overflow-x-hidden">
@@ -17,6 +17,7 @@
             ▶
         </button>
 
+        <!-- SIDEBAR COM AS CLASSES OFICIAIS DO SEU PROJETO -->
         <aside id="app-sidebar" class="sidebar-container shadow-figma fixed top-0 left-0 h-full z-40 transform translate-x-0 transition-transform duration-300">
             <div class="sidebar-header">
                 <div class="profile-box">
@@ -45,7 +46,7 @@
                     <span class="nav-icon">🏠</span>
                     <span class="item-text">Pagina inicial</span>
                 </a>
-                <a href="estoque.html" class="sidebar-link active">
+                <a href="estoque.html" class="sidebar-link">
                     <span class="nav-icon">📦</span>
                     <span class="item-text">Produtos</span>
                 </a>
@@ -53,7 +54,7 @@
                     <span class="nav-icon">💵</span>
                     <span class="item-text">Vendas</span>
                 </a>
-                <a href="servicos.html" class="sidebar-link">
+                <a href="servicos.html" class="sidebar-link active">
                     <span class="nav-icon">🛠️</span>
                     <span class="item-text">Serviços</span>
                 </a>
@@ -71,6 +72,7 @@
             </div>
         </aside>
 
+        <!-- ÁREA CONTEÚDO PRINCIPAL (MANTENDO AS REGRAS DO VISUALIZAR-PRODUTO) -->
         <main id="main-content" class="main-content-area flex-1 p-8 ml-64 transition-all duration-300 !w-full !max-w-none">
             
             <header class="w-full max-w-[1400px] mx-auto mb-6">
@@ -81,12 +83,12 @@
                             <span class="text-2xl font-black text-[var(--navy-primary)] tracking-wide leading-none">FISH AQUA PETS 🦴</span>
                         </div>
                     </div>
-                    <a href="estoque.html" class="px-4 py-2 bg-white border border-gray-200 text-gray-700 text-sm font-semibold rounded-xl shadow-sm hover:bg-gray-50 transition-all flex items-center gap-2">
-                        ⬅️ Voltar ao Estoque
+                    <a href="servicos.html" class="px-4 py-2 bg-white border border-gray-200 text-gray-700 text-sm font-semibold rounded-xl shadow-sm hover:bg-gray-50 transition-all flex items-center gap-2">
+                        ⬅️ Voltar para Serviços
                     </a>
                 </div>
                 <nav class="text-xs text-gray-400 font-medium mt-3">
-                    Estoque &nbsp;•&nbsp; Produtos &nbsp;•&nbsp; <span class="text-gray-600 font-semibold">Visualizar Detalhes</span>
+                    Serviços &nbsp;•&nbsp; Catálogo &nbsp;•&nbsp; <span class="text-gray-600 font-semibold">Visualizar Detalhes</span>
                 </nav>
             </header>
 
@@ -95,7 +97,7 @@
                 <section class="lg:col-span-3 bg-white rounded-2xl shadow-figma border border-gray-100 p-6">
                     <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-6">
                         <h2 class="text-xs font-bold uppercase tracking-wider text-gray-400 flex items-center gap-2">
-                            📋 Detalhes do Produto
+                            📋 Detalhes do Serviço
                         </h2>
                         <span class="text-xs font-semibold text-gray-400">Status no Sistema</span>
                     </div>
@@ -103,20 +105,20 @@
                     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8 bg-gray-50/50 p-4 rounded-xl border border-gray-100">
                         <div class="flex items-center gap-4">
                             <div class="w-16 h-16 bg-white border border-gray-200 rounded-xl flex items-center justify-center text-2xl shadow-sm overflow-hidden">
-                                📦
+                                🛠️
                             </div>
                             <div>
                                 <div class="flex items-center gap-2 flex-wrap">
-                                    <h1 id="prod-nome" class="text-xl font-bold text-gray-800">Carregando...</h1>
-                                    <span class="px-2.5 py-0.5 bg-green-50 text-green-600 text-xs font-bold rounded-full border border-green-200">Ativo</span>
+                                    <h1 id="srv-nome" class="text-xl font-bold text-gray-800">Carregando...</h1>
+                                    <span id="srv-badge-status" class="px-2.5 py-0.5 text-xs font-bold rounded-full border">---</span>
                                 </div>
-                                <p class="text-xs text-gray-400 mt-1 font-mono">SKU: <span id="prod-sku">---</span></p>
+                                <p class="text-xs text-gray-400 mt-1 font-mono">Código: <span id="srv-sku">---</span></p>
                             </div>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <a id="btn-editar-dinamico" href="#" class="px-6 py-2.5 bg-amber-500 text-white text-sm font-bold rounded-xl shadow-lg hover:bg-amber-600 transition-all flex items-center gap-2">
-                                ✏️ Editar Produto
+                            <a id="btn-editar-servico-dinamico" href="#" class="px-6 py-2.5 bg-amber-500 text-white text-sm font-bold rounded-xl shadow-lg hover:bg-amber-600 transition-all flex items-center gap-2">
+                                ✏️ Editar Serviço
                             </a>
                         </div>
                     </div>
@@ -124,49 +126,34 @@
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                         <div>
                             <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Identificação</span>
-                            <span class="text-sm font-semibold text-gray-700">Ficha Geral</span>
+                            <span class="text-sm font-semibold text-gray-700">Ficha Técnica</span>
                         </div>
                         <div>
                             <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Categoria</span>
-                            <span id="prod-categoria" class="text-sm font-semibold text-gray-700">---</span>
+                            <span id="srv-categoria" class="text-sm font-semibold text-gray-700">---</span>
                         </div>
                         <div>
-                            <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Unidade de Medida</span>
-                            <span class="text-sm font-semibold text-gray-700">Unidade (uni.)</span>
+                            <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Tempo Estimado</span>
+                            <span id="srv-duracao" class="text-sm font-semibold text-gray-700">---</span>
                         </div>
                         <div>
                             <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Preço de Venda</span>
-                            <span id="prod-preco" class="text-sm font-bold text-[var(--navy-primary)]">R$ 0,00</span>
+                            <span id="srv-preco" class="text-sm font-bold text-[var(--navy-primary)]">R$ 0,00</span>
                         </div>
                     </div>
                 </section>
 
                 <div class="lg:col-span-1 flex flex-col gap-6">
                     <div class="bg-white rounded-2xl shadow-figma border border-gray-100 p-6">
-                        <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Visão Geral do Estoque</span>
-                        <div class="flex items-baseline gap-2 mb-4">
-                            <span id="prod-estoque-qtd" class="text-3xl font-black text-gray-800">0</span>
-                            <span class="text-sm font-semibold text-gray-500">unidades disponíveis</span>
-                        </div>
-                        <div class="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
-                            <div class="h-full bg-blue-500 rounded-full" style="width: 100%"></div>
-                        </div>
-                        <div class="flex justify-between items-center mt-3 text-xs text-gray-400 font-medium">
-                            <span>Balanço de Inventário</span>
-                            <span class="text-blue-600 font-semibold">Atualizado</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl shadow-figma border border-gray-100 p-6">
-                        <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Dados de Operação</span>
+                        <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Custos Operacionais</span>
                         <div class="space-y-3">
+                            <div class="flex justify-between border-b border-gray-50 pb-2">
+                                <span class="text-xs text-gray-500 font-medium">Custo Estimado:</span>
+                                <span id="srv-custo" class="text-xs font-bold text-gray-700">R$ 0,00</span>
+                            </div>
                             <div class="flex justify-between border-b border-gray-50 pb-2">
                                 <span class="text-xs text-gray-500 font-medium">Margem Operacional:</span>
                                 <span class="text-xs font-bold text-green-600">Calculada via ERP</span>
-                            </div>
-                            <div class="flex justify-between border-b border-gray-50 pb-2">
-                                <span class="text-xs text-gray-500 font-medium">Tipo de Item:</span>
-                                <span class="text-xs font-bold text-gray-700">Mercadoria para Revenda</span>
                             </div>
                         </div>
                     </div>
@@ -176,17 +163,17 @@
                     <div>
                         <div class="flex items-center gap-4 border-b border-gray-100 pb-3 mb-5">
                             <button class="text-sm font-bold text-blue-600 border-b-2 border-blue-600 pb-3 -mb-[14px]">
-                                Descrição Geral
+                                Escopo do Serviço (O que está incluso)
                             </button>
                         </div>
 
-                        <div id="prod-descricao" class="prose prose-sm max-w-none text-gray-600 leading-relaxed space-y-4">
-                            </div>
+                        <div id="srv-descricao" class="prose prose-sm max-w-none text-gray-600 leading-relaxed space-y-4 font-medium">
+                        </div>
                     </div>
 
                     <div class="mt-8 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400 font-medium">
-                        <span>Ficha Técnica Dinâmica</span>
-                        <a href="estoque.html" class="text-blue-500 hover:underline flex items-center gap-1 font-semibold">
+                        <span>Ficha Técnica de Serviços</span>
+                        <a href="servicos.html" class="text-blue-500 hover:underline flex items-center gap-1 font-semibold">
                             Voltar para listagem
                         </a>
                     </div>
@@ -198,70 +185,90 @@
     </div>
 
     <script>
-    // 1. Nosso "Banco de Dados" simulado no Front-end (Mock Data)
-    const produtosBD = {
-        "2044011298108": {
-            nome: "Ração de Peixe Alcon",
-            preco: "R$ 67,67",
-            estoque: "67",
-            categoria: "Aquarismo / Alimentos",
-            descricao: `<p class="font-medium text-gray-800">Alimento completo em flocos, indicado para todas as espécies de peixes tropicais de estimação.</p>
+    const servicosBD = {
+        "1": {
+            nome: "Limpeza Completa de Lago Ornamental",
+            sku: "SRV-001",
+            preco: "R$ 450,00",
+            custo: "R$ 95,00",
+            duracao: "3.5 Horas",
+            status: "Ativo",
+            statusClass: "bg-green-50 text-green-600 border-green-200",
+            categoria: "Limpeza Geral",
+            descricao: `<p class="font-medium text-gray-800">Serviço especializado de manutenção e higienização para lagos ornamentais de carpas e peixes de água fria.</p>
                         <blockquote class="bg-blue-50/50 border-l-4 border-blue-500 p-3 rounded-r-xl text-xs text-gray-600 font-medium">
-                            💡 <strong>Recomendação de Alimentação:</strong> Oferecer de 2 a 3 vezes ao dia em quantidade suficiente para ser consumida em até 5 minutos.
-                        </blockquote>
-                        <p class="text-xs text-gray-500">Contém prebióticos para melhor digestibilidade e vitamina C protegida.</p>`
-        },
-        "2002246780607": {
-            nome: "Ração Gato Adulto Premium",
-            preco: "R$ 80,30",
-            estoque: "24",
-            categoria: "Felinos / Alimentos",
-            descricao: `<p class="font-medium text-gray-800">Ração premium com alta absorção de nutrientes para gatos castrados ou de ambientes internos.</p>
-                        <blockquote class="bg-amber-50/50 border-l-4 border-amber-500 p-3 rounded-r-xl text-xs text-gray-600 font-medium">
-                            🐱 <strong>Benefício:</strong> Controle de bolas de pelo e auxílio na saúde do trato urinário.
+                            💡 <strong>Escopo:</strong> Sifonagem de lodo orgânico do fundo, retrolavagem e limpeza mecânica dos filtros biológicos, aplicação de aceleradores biológicos e clarificadores de água, além de poda de plantas aquáticas marginais.
                         </blockquote>`
         },
-        "2084148123101": {
-            nome: "Filtro Hang-On HF-400",
-            preco: "R$ 36,50",
-            estoque: "12",
-            categoria: "Aquarismo / Equipamentos",
-            descricao: `<p class="font-medium text-gray-800">Filtro externo tipo Hang-On ideal para aquários de 40 a 80 litros.</p>
-                        <p class="text-xs text-gray-500">Realiza filtragem mecânica, química e biológica. Silencioso e de fácil manutenção.</p>`
+        "2": {
+            nome: "Manutenção Preventiva de Aquário Reef",
+            sku: "SRV-002",
+            preco: "R$ 180,00",
+            custo: "R$ 40,00",
+            duracao: "2.0 Horas",
+            status: "Ativo",
+            statusClass: "bg-green-50 text-green-600 border-green-200",
+            categoria: "Manutenção Preventiva",
+            descricao: `<p class="font-medium text-gray-800">Manutenção técnica periódica focada na estabilidade química e biológica de sistemas de recife de corais (Reef).</p>
+                        <p class="text-xs text-gray-500">Incluso no escopo: Testes de densidade (salinidade), Cálcio, Magnésio, Reserva Alcalina (KH), Fosfato e Nitrato. Limpeza de skimmer e raspagem de algas calcárias.</p>`
+        },
+        "3": {
+            nome: "Restauração Ecológica e Hardscape",
+            sku: "SRV-003",
+            preco: "R$ 1.200,00",
+            custo: "R$ 310,00",
+            duracao: "5.0 Horas",
+            status: "Pendente",
+            statusClass: "bg-amber-50 text-amber-600 border-amber-200",
+            categoria: "Restauração / Paisagismo",
+            descricao: `<p class="font-medium text-gray-800">Intervenção pesada para reformulação estética e recuperação biológica de aquários antigos ou negligenciados.</p>`
+        },
+        "4": {
+            nome: "Instalação de Chiller e Sistema de Co2",
+            sku: "SRV-004",
+            preco: "R$ 350,00",
+            custo: "R$ 25,00",
+            duracao: "1.75 Horas",
+            status: "Inativo",
+            statusClass: "bg-gray-50 text-gray-600 border-gray-200",
+            categoria: "Instalação / Montagem",
+            descricao: `<p class="font-medium text-gray-800">Montagem, tubulação, configuração de sensores de temperatura e calibração de cilindros de CO2 com válvula solenoide.</p>`
         }
     };
 
-            // 2. Capturar o ID que veio na URL (ex: ?id=2044011298108)
-        // 1. Captura o ID que está na URL da barra de navegação (?id=xxxx)
+            // Captura o ID do serviço na URL atual
         const urlParams = new URLSearchParams(window.location.search);
-        const produtoId = urlParams.get('id');
+        const servicoId = urlParams.get('id');
 
-        // 2. Se o ID existir, injeta ele direto no link do botão de editar
-        if (produtoId) {
-            document.getElementById('btn-editar-dinamico').href = `editar-produto.html?id=${produtoId}`;
+        // Altera o destino do botão para a tela editar-servico passando o ID correto
+        if (servicoId) {
+            document.getElementById('btn-editar-servico-dinamico').href = `editar-servico.html?id=${servicoId}`;
         }
 
-    // 3. Buscar os dados do produto com base no ID e injetar na tela
-    if (produtoId && produtosBD[produtoId]) {
-        const produtoInfo = produtosBD[produtoId];
+    if (servicoId && servicosBD[servicoId]) {
+        const srvInfo = servicosBD[servicoId];
 
-        document.getElementById('prod-nome').innerText = produtoInfo.nome;
-        document.getElementById('prod-sku').innerText = produtoId;
-        document.getElementById('prod-categoria').innerText = produtoInfo.categoria;
-        document.getElementById('prod-preco').innerText = produtoInfo.preco;
-        document.getElementById('prod-estoque-qtd').innerText = produtoInfo.estoque;
-        document.getElementById('prod-descricao').innerHTML = produtoInfo.descricao;
+        document.getElementById('srv-nome').innerText = srvInfo.nome;
+        document.getElementById('srv-sku').innerText = srvInfo.sku;
+        document.getElementById('srv-categoria').innerText = srvInfo.categoria;
+        document.getElementById('srv-preco').innerText = srvInfo.preco;
+        document.getElementById('srv-custo').innerText = srvInfo.custo;
+        document.getElementById('srv-duracao').innerText = srvInfo.duracao;
+        document.getElementById('srv-descricao').innerHTML = srvInfo.descricao;
+        
+        const badge = document.getElementById('srv-badge-status');
+        badge.innerText = srvInfo.status;
+        badge.className = `px-2.5 py-0.5 text-xs font-bold rounded-full border ${srvInfo.statusClass}`;
+        
+        document.getElementById('link-editar').href = `cadastrar-servico.html?id=${servicoId}`;
     } else {
-        // Caso não encontre o ID ou acesse a página direto
-        document.getElementById('prod-nome').innerText = "Produto não localizado";
-        document.getElementById('prod-descricao').innerHTML = "<p class='text-red-500 font-semibold'>Erro: Nenhum produto válido selecionado no estoque.</p>";
+        document.getElementById('srv-nome').innerText = "Serviço não localizado";
+        document.getElementById('srv-descricao').innerHTML = "<p class='text-red-500 font-semibold'>Erro: Nenhum serviço válido selecionado.</p>";
     }
 
     
-
     </script>
 
-    <!-- Script compartilhado da Sidebar -->
     <script src="sidebar.js"></script>
 </body>
 </html>

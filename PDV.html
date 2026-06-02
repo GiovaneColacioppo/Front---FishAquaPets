@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FishAqua Pets - Registrar Venda</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -44,7 +45,7 @@
                 </a>
                 <a href="estoque.html" class="sidebar-link">
                     <span class="nav-icon">📦</span>
-                    <span class="item-text">Estoque</span>
+                    <span class="item-text">Produtos</span>
                 </a>
                 <a href="vendas.html" class="sidebar-link active">
                     <span class="nav-icon">💵</span>
@@ -146,7 +147,7 @@
 
                             <div class="flex flex-col gap-1">
                                 <label class="text-xs font-semibold text-blue-600">Forma de pagamento</label>
-                                <select class="w-full px-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-400 text-gray-700 font-medium">
+                                <select id="forma-pagamento" class="w-full px-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-400 text-gray-700 font-medium">
                                     <option value="">Selecione a forma</option>
                                     <option value="dinheiro">Dinheiro</option>
                                     <option value="pix">Pix</option>
@@ -157,7 +158,7 @@
 
                             <div class="flex flex-col gap-1">
                                 <label class="text-xs font-semibold text-blue-600">Tipo de venda</label>
-                                <select class="w-full px-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-400 text-gray-700 font-medium">
+                                <select id="tipo-venda" class="w-full px-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-400 text-gray-700 font-medium">
                                     <option value="balcao">Pronta Entrega (Balcão)</option>
                                     <option value="encomenda">Encomenda</option>
                                     <option value="entrega">Entrega / Delivery</option>
@@ -167,7 +168,7 @@
 
                         <div class="flex flex-col gap-1 mt-4">
                             <label class="text-xs font-semibold text-blue-600">Observações da venda</label>
-                            <textarea rows="2" placeholder="Caso precise anotar algo rápido (ex: nome do morador, deixar na portaria, etc)..." class="w-full px-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-400 text-gray-700 resize-none"></textarea>
+                            <textarea id="observacoes-venda" rows="2" placeholder="Caso precise anotar algo rápido (ex: nome do morador, deixar na portaria, etc)..." class="w-full px-3 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-400 text-gray-700 resize-none"></textarea>
                         </div>
                     </div>
                 </div>
@@ -231,7 +232,6 @@
             const inputDesconto = document.getElementById('input-desconto');
             const badgePorcentagemDesconto = document.getElementById('badge-porcentagem-desconto');
             
-            // Novos Elementos do Frete
             const chkFrete = document.getElementById('chk-frete');
             const inputFrete = document.getElementById('input-frete');
 
@@ -309,14 +309,13 @@
                 });
             }
 
-            // Ativa / Desativa o Frete
             if (chkFrete && inputFrete) {
                 chkFrete.addEventListener('change', () => {
                     if (chkFrete.checked) {
                         inputFrete.disabled = false;
                         inputFrete.classList.remove('bg-gray-100');
                         inputFrete.classList.add('bg-white');
-                        inputFrete.value = "10.00"; // Sugere um valor padrão ou deixa 0.00 se preferir
+                        inputFrete.value = "10.00"; 
                         inputFrete.select();
                     } else {
                         inputFrete.disabled = true;
@@ -402,7 +401,6 @@
                     `;
                 });
 
-                // Cálculos de Totais, Desconto e Frete
                 const porcDesconto = inputDesconto ? (parseFloat(inputDesconto.value) || 0) : 0;
                 const valorDesconto = subtotal * (porcDesconto / 100);
                 
@@ -413,7 +411,6 @@
 
                 const totalGeral = subtotal - valorDesconto + valorFrete;
 
-                // Atualiza a Interface de Resumo
                 if(badgePorcentagemDesconto) badgePorcentagemDesconto.textContent = `${porcDesconto}%`;
                 if(txtSubtotal) txtSubtotal.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
                 if(txtDesconto) txtDesconto.textContent = `- R$ ${valorDesconto.toFixed(2).replace('.', ',')}`;
@@ -427,7 +424,7 @@
             ========================================================================== */
             if (inputDinheiro) {
                 inputDinheiro.addEventListener('input', () => {
-                    const totalGeral = parseFloat(txtTotal.textContent.replace('R$', '').replace(',', '.').trim()) || 0;
+                    const totalGeral = parseFloat(txtTotal.textContent.replace('R$', '').replace(/\./g, '').replace(',', '.').trim()) || 0;
                     atualizarTroco(totalGeral);
                 });
             }
@@ -467,13 +464,34 @@
                 });
             }
 
+            /* ==========================================================================
+            7. BOTÃO SALVAR (MENSAGEM DE SUCESSO COM TIMESTAMP DINÂMICO)
+            ========================================================================== */
             if (btnSalvar) {
                 btnSalvar.addEventListener('click', (e) => {
                     e.preventDefault();
                     
-                    // Dica: No futuro, você pode colocar o seu fetch/axios aqui antes de redirecionar!
+                    if (carrinho.length === 0) {
+                        alert('Atenção: Adicione pelo menos um produto ao carrinho antes de finalizar!');
+                        return;
+                    }
+
+                    const selectPagamento = document.getElementById('forma-pagamento');
+                    if (selectPagamento && selectPagamento.value === "") {
+                        alert('Por favor, selecione a Forma de Pagamento!');
+                        return;
+                    }
+
+                    // Captura a data e hora atual do sistema de forma dinâmica
+                    const agora = new Date();
+                    const dataFormatada = agora.toLocaleDateString('pt-BR');
+                    const horaFormatada = agora.toLocaleTimeString('pt-BR');
+                    const timestamp = `${dataFormatada} às ${horaFormatada}`;
+
+                    // Dispara o alerta unindo a mensagem e o timestamp gerado
+                    alert(`✨ Venda Registrada com Sucesso!\n📅 Data/Hora: ${timestamp}\n\nRedirecionando para o histórico...`);
                     
-                    // Redireciona para a tela de vendas
+                    // Simula a navegação para a listagem
                     window.location.href = 'vendas.html';
                 });
             }

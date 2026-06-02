@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FishAqua Pets - Histórico de Vendas</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -44,7 +45,7 @@
                 </a>
                 <a href="estoque.html" class="sidebar-link">
                     <span class="nav-icon">📦</span>
-                    <span class="item-text">Estoque</span>
+                    <span class="item-text">Produtos</span>
                 </a>
                 <a href="vendas.html" class="sidebar-link active">
                     <span class="nav-icon">💵</span>
@@ -108,6 +109,7 @@
                                 <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">ID Venda</th>
                                 <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Produto Principal</th>
                                 <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Data</th>
+                                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Horário</th>
                                 <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Valor Total</th>
                                 <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-center">Status</th>
                                 <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-center">Ações</th>
@@ -118,14 +120,19 @@
                                 <td class="px-6 py-4 text-sm font-mono text-gray-500">#001</td>
                                 <td class="px-6 py-4 text-sm font-semibold text-gray-800">Ração Gato Adulto</td>
                                 <td class="px-6 py-4 text-sm text-gray-600">06/04/2026</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">14:32</td>
                                 <td class="px-6 py-4 text-sm font-bold text-gray-700">R$ 80,30</td>
                                 <td class="px-6 py-4 text-sm text-center">
                                     <span class="px-2.5 py-1 text-xs font-semibold text-green-700 bg-green-50 rounded-lg border border-green-200">Concluído</span>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-center">
                                     <div class="flex items-center justify-center gap-2">
-                                        <button onclick="abrirVisualizar('001')" title="Ver Detalhes" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">👁️</button>
-                                        <button onclick="abrirRecibo('001')" title="Imprimir Recibo" class="p-1.5 bg-gray-50 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">🖨️</button>
+                                        <button onclick="abrirVisualizar('001')" title="Ver Detalhes" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">
+                                            <i data-lucide="eye" class="w-4 h-4"></i>
+                                        </button>
+                                        <button onclick="abrirRecibo('001')" title="Imprimir Recibo" class="p-1.5 bg-gray-50 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
+                                            <i data-lucide="printer" class="w-4 h-4"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -134,14 +141,19 @@
                                 <td class="px-6 py-4 text-sm font-mono text-gray-500">#002</td>
                                 <td class="px-6 py-4 text-sm font-semibold text-gray-800">Ração Top Dog</td>
                                 <td class="px-6 py-4 text-sm text-gray-600">06/04/2026</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">16:15</td>
                                 <td class="px-6 py-4 text-sm font-bold text-gray-700">R$ 69,47</td>
                                 <td class="px-6 py-4 text-sm text-center">
                                     <span class="px-2.5 py-1 text-xs font-semibold text-green-700 bg-green-50 rounded-lg border border-green-200">Concluído</span>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-center">
                                     <div class="flex items-center justify-center gap-2">
-                                        <button onclick="abrirVisualizar('002')" title="Ver Detalhes" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">👁️</button>
-                                        <button onclick="abrirRecibo('002')" title="Imprimir Recibo" class="p-1.5 bg-gray-50 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">🖨️</button>
+                                        <button onclick="abrirVisualizar('002')" title="Ver Detalhes" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">
+                                            <i data-lucide="eye" class="w-4 h-4"></i>
+                                        </button>
+                                        <button onclick="abrirRecibo('002')" title="Imprimir Recibo" class="p-1.5 bg-gray-50 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
+                                            <i data-lucide="printer" class="w-4 h-4"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -150,14 +162,19 @@
                                 <td class="px-6 py-4 text-sm font-mono text-gray-500">#003</td>
                                 <td class="px-6 py-4 text-sm font-semibold text-gray-800">Saco de ração coelho</td>
                                 <td class="px-6 py-4 text-sm text-gray-600">05/04/2026</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">09:10</td>
                                 <td class="px-6 py-4 text-sm font-bold text-gray-700">R$ 98,55</td>
                                 <td class="px-6 py-4 text-sm text-center">
                                     <span class="px-2.5 py-1 text-xs font-semibold text-amber-700 bg-amber-50 rounded-lg border border-amber-200">Pendente</span>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-center">
                                     <div class="flex items-center justify-center gap-2">
-                                        <button onclick="abrirVisualizar('003')" title="Ver Detalhes" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">👁️</button>
-                                        <button onclick="abrirRecibo('003')" title="Imprimir Recibo" class="p-1.5 bg-gray-50 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">🖨️</button>
+                                        <button onclick="abrirVisualizar('003')" title="Ver Detalhes" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">
+                                            <i data-lucide="eye" class="w-4 h-4"></i>
+                                        </button>
+                                        <button onclick="abrirRecibo('003')" title="Imprimir Recibo" class="p-1.5 bg-gray-50 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
+                                            <i data-lucide="printer" class="w-4 h-4"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -166,14 +183,19 @@
                                 <td class="px-6 py-4 text-sm font-mono text-gray-500">#004</td>
                                 <td class="px-6 py-4 text-sm font-semibold text-gray-800">Ração Premiata 15kg</td>
                                 <td class="px-6 py-4 text-sm text-gray-600">06/04/2026</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">11:05</td>
                                 <td class="px-6 py-4 text-sm font-bold text-gray-700">R$ 80,30</td>
                                 <td class="px-6 py-4 text-sm text-center">
                                     <span class="px-2.5 py-1 text-xs font-semibold text-red-700 bg-red-50 rounded-lg border border-red-200">Cancelado</span>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-center">
                                     <div class="flex items-center justify-center gap-2">
-                                        <button onclick="abrirVisualizar('004')" title="Ver Detalhes" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">👁️</button>
-                                        <button onclick="abrirRecibo('004')" title="Imprimir Recibo" class="p-1.5 bg-gray-50 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">🖨️</button>
+                                        <button onclick="abrirVisualizar('004')" title="Ver Detalhes" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">
+                                            <i data-lucide="eye" class="w-4 h-4"></i>
+                                        </button>
+                                        <button onclick="abrirRecibo('004')" title="Imprimir Recibo" class="p-1.5 bg-gray-50 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
+                                            <i data-lucide="printer" class="w-4 h-4"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -200,7 +222,7 @@
             <div class="p-5 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
                 <div>
                     <h3 class="text-base font-bold text-gray-800">Ficha da Venda <span id="venda-detalhe-id" class="font-mono text-blue-600"></span></h3>
-                    <p class="text-xs text-gray-400 font-medium">Realizada em <span id="venda-detalhe-data"></span></p>
+                    <p class="text-xs text-gray-400 font-medium">Realizada em <span id="venda-detalhe-data"></span> às <span id="venda-detalhe-horario" class="font-semibold text-gray-600"></span></p>
                 </div>
                 <span id="venda-detalhe-status" class="px-2.5 py-1 text-xs font-bold rounded-lg border"></span>
             </div>
@@ -262,7 +284,7 @@
     <script>
         const bancoVendas = {
             "001": {
-                id: "#001", data: "06/04/2026", status: "Concluído",
+                id: "#001", data: "06/04/2026", horario: "14:32", status: "Concluído",
                 statusClass: "text-green-700 bg-green-50 border-green-200",
                 pagamento: "Pix", tipo: "Pronta Entrega (Balcão)",
                 subtotal: "R$ 80,30", desconto: "0% (R$ 0,00)", frete: "R$ 0,00", total: "R$ 80,30",
@@ -270,7 +292,7 @@
                 itens: [{ nome: "Ração Gato Adulto", qtd: 1, preco: "R$ 80,30" }]
             },
             "002": {
-                id: "#002", data: "06/04/2026", status: "Concluído",
+                id: "#002", data: "06/04/2026", horario: "16:15", status: "Concluído",
                 statusClass: "text-green-700 bg-green-50 border-green-200",
                 pagamento: "Cartão de Crédito", tipo: "Entrega / Delivery",
                 subtotal: "R$ 60,50", desconto: "5% (R$ 3,03)", frete: "R$ 12,00", total: "R$ 69,47",
@@ -281,7 +303,7 @@
                 ]
             },
             "003": {
-                id: "#003", data: "05/04/2026", status: "Pendente",
+                id: "#003", data: "05/04/2026", horario: "09:10", status: "Pendente",
                 statusClass: "text-amber-700 bg-amber-50 border-amber-200",
                 pagamento: "A combinar", tipo: "Encomenda",
                 subtotal: "R$ 109,50", desconto: "10% (R$ 10,95)", frete: "R$ 0,00", total: "R$ 98,55",
@@ -289,7 +311,7 @@
                 itens: [{ nome: "Saco de ração coelho", qtd: 3, preco: "R$ 36,50" }]
             },
             "004": {
-                id: "#004", data: "06/04/2026", status: "Cancelado",
+                id: "#004", data: "06/04/2026", horario: "11:05", status: "Cancelado",
                 statusClass: "text-red-700 bg-red-50 border-red-200",
                 pagamento: "Dinheiro", tipo: "Pronta Entrega (Balcão)",
                 subtotal: "R$ 80,30", desconto: "0% (R$ 0,00)", frete: "R$ 0,00", total: "R$ 80,30",
@@ -321,6 +343,7 @@
 
             document.getElementById('venda-detalhe-id').textContent = venda.id;
             document.getElementById('venda-detalhe-data').textContent = venda.data;
+            document.getElementById('venda-detalhe-horario').textContent = venda.horario;
             document.getElementById('venda-detalhe-pagamento').textContent = venda.pagamento;
             document.getElementById('venda-detalhe-tipo').textContent = venda.tipo;
             document.getElementById('venda-detalhe-subtotal').textContent = venda.subtotal;
@@ -373,7 +396,7 @@
             document.querySelectorAll('.linha-venda').forEach(linha => {
                 const idVenda = linha.children[0].textContent.toLowerCase();
                 const produtoPrincipal = linha.children[1].textContent.toLowerCase();
-                const statusTexto = linha.children[4].textContent.toLowerCase().trim();
+                const statusTexto = linha.children[5].textContent.toLowerCase().trim(); // Atualizado para o índice 5
 
                 const bateuPesquisa = idVenda.includes(termo) || produtoPrincipal.includes(termo);
                 const bateuStatus = statusFiltro === "" || statusTexto.includes(statusFiltro);
@@ -392,7 +415,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Mapeia os 3 elementos de controle
             const inputPesquisa = document.getElementById('pesquisa-venda') || document.getElementById('input-pesquisa');
             const filtroStatus = document.getElementById('filtro-status');
             const filtroData = document.getElementById('filtro-data');
@@ -400,34 +422,29 @@
             function executarFiltrosCombinados() {
                 const termoBusca = inputPesquisa ? inputPesquisa.value.toLowerCase().trim() : '';
                 const statusSelecionado = filtroStatus ? filtroStatus.value.toLowerCase() : '';
-                const dataSelecionada = filtroData ? filtroData.value : ''; // Formato nativo: YYYY-MM-DD
+                const dataSelecionada = filtroData ? filtroData.value : ''; 
 
-                // Converte o formato do input (YYYY-MM-DD) para o formato da sua tabela (DD/MM/YYYY)
                 let dataFormatada = '';
                 if (dataSelecionada) {
                     const [ano, mes, dia] = dataSelecionada.split('-');
                     dataFormatada = `${dia}/${mes}/${ano}`;
                 }
 
-                // Seleciona as linhas de dados da tabela
                 const linhas = document.querySelectorAll('tbody tr');
 
                 linhas.forEach(linha => {
-                    const colunas = linha.querySelectorAll('td');
-                    if (colunas.length < 5) return; // Ignora linhas vazias ou de cabeçalho
+                    const colunas = App.querySelectorAll ? linha.querySelectorAll('td') : linha.children;
+                    if (colunas.length < 6) return; // Atualizado para ignorar se quebrar a nova estrutura de 6 colunas úteis
 
-                    // Captura os textos das colunas específicas da sua tabela de vendas
                     const textoID = colunas[0].textContent.toLowerCase();
                     const textoProduto = colunas[1].textContent.toLowerCase();
                     const textoData = colunas[2].textContent.trim();
-                    const textoStatus = colunas[4].textContent.toLowerCase();
+                    const textoStatus = colunas[5].textContent.toLowerCase(); // Atualizado para o novo índice do Status (5)
 
-                    // Regras lógicas de filtragem (Retorna true se bater com o filtro ou se o filtro estiver vazio)
                     const bateBusca = termoBusca === '' || textoID.includes(termoBusca) || textoProduto.includes(termoBusca);
                     const bateStatus = statusSelecionado === '' || textoStatus.includes(statusSelecionado);
                     const bateData = dataSelecionada === '' || textoData === dataFormatada;
 
-                    // Exibe a linha apenas se ela passar com sucesso por TODOS os filtros ativos
                     if (bateBusca && bateStatus && bateData) {
                         linha.style.display = '';
                     } else {
@@ -436,14 +453,15 @@
                 });
             }
 
-            // Adiciona os ouvintes de eventos para atualizar a tabela em tempo real
             if (inputPesquisa) inputPesquisa.addEventListener('input', executarFiltrosCombinados);
             if (filtroStatus) filtroStatus.addEventListener('change', executarFiltrosCombinados);
             if (filtroData) filtroData.addEventListener('change', executarFiltrosCombinados);
         });
     </script>
 
-
-<script src="sidebar.js"></script>
+    <script src="sidebar.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

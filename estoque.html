@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FishAqua Pets - Estoque</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -46,7 +47,7 @@
         </a>
         <a href="estoque.html" class="sidebar-link active">
             <span class="nav-icon">📦</span>
-            <span class="item-text">Estoque</span>
+            <span class="item-text">Produtos</span>
         </a>
         <a href="vendas.html" class="sidebar-link">
             <span class="nav-icon">💵</span>
@@ -160,7 +161,7 @@
                                 <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Nome</th>
                                 <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500">Preço</th>
                                 <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 w-[180px]">Estoque</th>
-                                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-center w-[100px]">Destravar</th>
+                                <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-center w-[100px]">Alterar quantidade</th>
                                 <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-500 text-center w-[150px]">Ações</th>
                             </tr>
                         </thead>
@@ -187,13 +188,15 @@
                                 <td class="px-6 py-4 text-sm text-center">
                                     <div class="flex items-center justify-center gap-2">
                                         <a href="visualizar-produto.html?id=2044011298108" title="Visualizar" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm">
-                                            👁️
+                                           <i data-lucide="eye" class="w-4 h-4"></i>
                                         </a>
                                         
                                         <a href="editar-produto.html?id=2044011298108" title="Editar" class="p-1.5 bg-amber-50 text-amber-600 rounded-lg hover:bg-amber-100 transition-colors text-sm">
-                                            ✏️
+                                            <i data-lucide="pencil" class="w-4 h-4"></i>
                                         </a>
-                                        <button title="Excluir" class="p-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">❌</button>
+                                        <button title="Excluir" class="p-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">
+                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -218,12 +221,14 @@
                                 <td class="px-6 py-4 text-sm text-center">
                                     <div class="flex items-center justify-center gap-2">
                                         <a href="visualizar-produto.html?id=2002246780607" title="Visualizar" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm">
-                                            👁️
+                                            <i data-lucide="eye" class="w-4 h-4"></i>
                                         </a>
                                         <a href="editar-produto.html?id=2002246780607" title="Editar" class="p-1.5 bg-amber-50 text-amber-600 rounded-lg hover:bg-amber-100 transition-colors text-sm flex items-center justify-center">
-                                            ✏️
+                                            <i data-lucide="pencil" class="w-4 h-4"></i>
                                         </a>
-                                        <button title="Excluir" class="p-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">❌</button>
+                                        <button title="Excluir" class="p-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">
+                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -248,12 +253,14 @@
                                 <td class="px-6 py-4 text-sm text-center">
                                     <div class="flex items-center justify-center gap-2">
                                         <a href="visualizar-produto.html?id=2084148123101" title="Visualizar" class="p-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm">
-                                            👁️
+                                            <i data-lucide="eye" class="w-4 h-4"></i>
                                         </a>
                                         <a href="editar-produto.html?id=2084148123101" title="Editar" class="p-1.5 bg-amber-50 text-amber-600 rounded-lg hover:bg-amber-100 transition-colors text-sm flex items-center justify-center">
-                                            ✏️
+                                            <i data-lucide="pencil" class="w-4 h-4"></i>
                                         </a>
-                                        <button title="Excluir" class="p-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">❌</button>
+                                        <button title="Excluir" class="p-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">
+                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -267,5 +274,10 @@
     </div>
 
     <script src="sidebar.js"></script>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
 </body>
 </html>
